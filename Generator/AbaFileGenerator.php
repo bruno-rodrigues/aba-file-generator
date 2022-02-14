@@ -295,7 +295,7 @@ class AbaFileGenerator
         }
 
         if (! preg_match('/^[\d]{0,9}$/', $transaction->getAccountNumber())) {
-            throw new Exception('Detail record account number is invalid. Must be up to 9 digits only.');
+            throw new Exception('Detail record account number is invalid. Must be up to 9 digits only: ' . $transaction->getAccountNumber() . ' ' . $transaction->getReference());
         }
 
         if ($transaction->getIndicator() && ! preg_match('/^W|X|Y| /', $transaction->getIndicator())) {
