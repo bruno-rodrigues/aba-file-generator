@@ -5,14 +5,14 @@ namespace AbaFileGenerator\Tests\Generator;
 use AbaFileGenerator\Generator\AbaFileGenerator;
 use AbaFileGenerator\Model\TransactionCode;
 use AbaFileGenerator\Tests\Fixtures\TransactionFixtures;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
-class AbaFileGeneratorTest extends PHPUnit_Framework_TestCase
+class AbaFileGeneratorTest extends TestCase
 {
     private $fixtureTransactions;
     private $abaLines;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $fixtures                  = new TransactionFixtures();
@@ -60,9 +60,9 @@ class AbaFileGeneratorTest extends PHPUnit_Framework_TestCase
                     str_repeat('0', 9 - strlen($transaction->getAccountNumber())) . $transaction->getAccountNumber(),
                     substr($record, 8, 9)
                 );
-            } else { // Non-Nab accounts can be alphanumeric, right justified, blank filled.
+            } else {
                 $this->assertSame(
-                    str_repeat(' ', 9 - strlen($transaction->getAccountNumber())) . $transaction->getAccountNumber(),
+                    str_repeat('0', 9 - strlen($transaction->getAccountNumber())) . $transaction->getAccountNumber(),
                     substr($record, 8, 9)
                 );
             }
